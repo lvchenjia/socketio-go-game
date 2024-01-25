@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Go Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      display: none;
+      /* 初始时设置为不显示 */
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 在有内容时显示 */
+    .container:not(:empty) {
+      display: block;
+    }
+
+
+    #usernameInput,
+    #roomCodeInput {
+      /* margin-bottom: 10px; */
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 8px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    #gameBoard {
+      display: grid;
+      grid-template-columns: repeat(9, 30px);
+      gap: 0px;
+      margin-bottom: 20px;
+    }
+
+    .cell {
+      width: 30px;
+      height: 30px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      cursor: pointer;
+    }
+
+    .cell-last-move {
+      width: 30px;
+      height: 30px;
+      border: 1px solid #ccc;
+      background-color: #c8feb3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      cursor: pointer;
+    }
+
+    #messages {
+      width: 600px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 10px;
+      overflow-y: scroll;
+      max-height: 200px;
+    }
+
+    #turn {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #333;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <label for="usernameInput">你的名字:</label>
+    <input type="text" id="usernameInput">
+    <button onclick="createRoom()">创建房间</button>
+    <div style="height: 0px;"></div>
+    <br/>
+    <label for="roomCodeInput">房间号码:</label>
+    <input type="text" id="roomCodeInput">
+    <button onclick="joinRoom()">加入房间</button>
+  </div>
+
+  <div class="container">
+    <div id="turn"></div>
+    <div id="room"></div>
+    <div id="info"></div>
+    <div id="score"></div>
+  </div>
+
+  <div class="container" id="gameBoard"></div>
+
+  <div class="container" id="messages"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+  <script src="./client.js"></script>
+</body>
+
+</html>
